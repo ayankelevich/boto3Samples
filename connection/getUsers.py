@@ -26,7 +26,7 @@ pprint(ec2s)
 
 # does not work <===================
 s3_console_resource = boto3.resource('s3')
-filters = [{'name': 'name', 'value': 'twelvechairs.com'}]
+filters = [{'Name': 'name', 'Values': ['12chairs.com']}]
 bucket_list_filtered = s3_console_resource.buckets.filter(Filter=filters)
 for bucket in bucket_list_filtered:
     print(bucket.name, bucket.creation_date)
