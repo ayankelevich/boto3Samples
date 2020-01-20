@@ -24,10 +24,12 @@ ec2s = ec2_console_client.describe_instances()
 # for beautified JSON print
 pprint(ec2s)
 
-# does not work <===================
+# name filter does NOT work, probably just for objects in bucket <===================
 s3_console_resource = boto3.resource('s3')
-filters = [{'Name': 'name', 'Values': ['12chairs.com']}]
-bucket_list_filtered = s3_console_resource.buckets.filter(Filter=filters)
+filter1 = {"Name": "name", "Values": ["12chairs.com", "bytemple.com"]}
+filter2 = {"Name": "tag:Env", "Values": ["TestInstance"]}
+
+bucket_list_filtered = s3_console_resource.buckets.filter(Filter=[filter1])
 for bucket in bucket_list_filtered:
     print(bucket.name, bucket.creation_date)
 
