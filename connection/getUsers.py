@@ -27,7 +27,7 @@ pprint(ec2s)
 # name filter does NOT work, probably just for objects in bucket <===================
 s3_console_resource = boto3.resource('s3')
 filter1 = {"Name": "name", "Values": ["12chairs.com", "bytemple.com"]}
-filter2 = {"Name": "tag:Env", "Values": ["TestInstance"]}
+filter2 = {"Name": "tag:Env", "Values": ["TestInstance", "testinstance"]}
 
 bucket_list_filtered = s3_console_resource.buckets.filter(Filter=[filter1])
 for bucket in bucket_list_filtered:
