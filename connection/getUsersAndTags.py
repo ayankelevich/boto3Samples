@@ -33,9 +33,21 @@ bucket_list_filtered = s3_console_resource.buckets.filter(Filter=[filter1])
 for bucket in bucket_list_filtered:
     print(bucket.name, bucket.creation_date)
 
-sts_console_client = boto3.client('sts')
-response = sts_console_client.get_caller_identity()
-print(response['UserId'], response['Account'], response['Arn'])
+
+
+s3_console_client = boto3.client('s3')
+s3_console_client.put_bucket_tagging(
+    Bucket='lab2-input-bucket-ay',
+    Tagging={'TagSet': [{'Key': 'tag_key', 'Value': 'tag_value123'}]}
+)
+
+# s3_console_client.delete_bucket_tagging(
+#     Bucket='lab2-input-bucket-ay'
+# )
+
+# for other objects, Object name goes into the Resources list
+ec2_console_client.create_tags(Resources=['snap-0a27b3cc04cb78ad1'], Tags=[{'Key': 'backup', 'Value': 'yes/no'}])
+# ec2_console_client.delete_tags(Resources=['snap-0a27b3cc04cb78ad1'], Tags=[{'Key': 'backup', 'Value': 'yes'}])
 
 # Example of using client
 # ec2_con_cli.start_instances(InstanceIds=[instance_id])
